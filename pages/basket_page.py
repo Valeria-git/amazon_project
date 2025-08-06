@@ -62,7 +62,7 @@ class BasketPage(Base):
  
 
  
-
+    """Go to checkout in case basket is not empty"""
     def checkout(self):
 
         self.get_current_url()
@@ -72,7 +72,7 @@ class BasketPage(Base):
 
         self.get_screenshot()
  
-
+    """Delete product from basket"""
     def delete_product_from_basket(self):
         self.get_current_url()
         self.click_basket_button()
@@ -81,4 +81,4 @@ class BasketPage(Base):
             print("Basket empty")
         else:
             self.click_delete_from_basket_button()
-        self.get_screenshot()
+

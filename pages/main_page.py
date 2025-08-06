@@ -104,7 +104,7 @@ class MainPage(Base):
  
 
  
-
+    """Find the book using filters"""
     def find_book(self):
 
         self.get_current_url()
@@ -120,5 +120,5 @@ class MainPage(Base):
         self.click_first_book()
 
         
-        self.get_screenshot()
+
  

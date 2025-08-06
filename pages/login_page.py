@@ -68,7 +68,7 @@ class LoginPage(Base):
  
 
  
-
+    """Login"""
     def authorization(self):
 
 
@@ -83,5 +83,5 @@ class LoginPage(Base):
         self.click_continue_button()
         self.input_password(creds["password"])
         self.click_sign_in_button()
-        self.get_screenshot()
+
  
