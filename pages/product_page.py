@@ -50,7 +50,7 @@ class ProductPage(Base):
  
 
  
-
+    """Adding book to cart"""
     def buy_book(self):
 
         self.get_current_url()

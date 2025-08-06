@@ -32,7 +32,7 @@ class PaymentPage(Base):
  
 
  
-
+    """Checking if user opened payment page"""
     def payment(self):
 
         self.get_current_url()
