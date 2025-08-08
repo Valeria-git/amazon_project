@@ -46,6 +46,8 @@ amazon_project/
 ├── pages/          # Page Object Model classes
 ├── tests/          # PyTest test cases
 ├── screens/        # Screens as results of tests
+├── logs/           # Log files
+├── test_results/   # Allure test results
 ├── utils/          # Utility modules (ignored via .gitignore)
 └── README.md
 ```
@@ -64,3 +66,16 @@ You must create your own `credentials.json` file with the following structure:
   "email": "your_email@example.com",
   "password": "your_password"
 }
+
+
+## How run test using allure 
+
+```bash
+python3 -m pytest --alluredir=test_results/ tests
+```
+
+## How see alure test result report
+
+```bash
+allure serve test_results/ 
+```
