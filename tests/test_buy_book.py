@@ -6,9 +6,10 @@ from pages.product_page import ProductPage
 from pages.basket_page import BasketPage
 from pages.payment_page import PaymentPage
 import pytest
+import allure
 
 
-
+allure.description("Buy book")
 def test_buy_book(set_up):
 
 

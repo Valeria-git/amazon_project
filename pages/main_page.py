@@ -2,6 +2,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from base.base import Base
+from logger import Logger
+import allure
 
 
 class MainPage(Base):
@@ -106,18 +108,21 @@ class MainPage(Base):
  
     """Find the book using filters"""
     def find_book(self):
+        with allure.step("Find particular book using filters"):
+            Logger.add_start_step(method = "find_book")
 
-        self.get_current_url()
+            self.get_current_url()
 
 
-        self.click_burger_menu()
-        self.click_audible_books_and_originals_link()
-        self.click_audible_books_and_originals_link_submenu()
-        self.click_romance_type()
-        self.click_historical_romance_type()
-        self.click_get_duration()
-        self.click_language()
-        self.click_first_book()
+            self.click_burger_menu()
+            self.click_audible_books_and_originals_link()
+            self.click_audible_books_and_originals_link_submenu()
+            self.click_romance_type()
+            self.click_historical_romance_type()
+            self.click_get_duration()
+            self.click_language()
+            self.click_first_book()
+            Logger.add_end_step(url = self.driver.current_url, method = "find_book")
 
         
 
