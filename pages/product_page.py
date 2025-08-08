@@ -2,7 +2,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from base.base import Base
-
+from logger import Logger
+import allure
 
 
 
@@ -52,14 +53,19 @@ class ProductPage(Base):
  
     """Adding book to cart"""
     def buy_book(self):
+        with allure.step("Add product to cart"):
+            Logger.add_start_step(method = "buy_book")
 
-        self.get_current_url()
-
-
-        self.click_radio_button_buy_without_free_trial()
-        self.click_add_to_cart_button()
-        self.assert_word(self.get_added_to_cart_label(), "Added to cart")
+            self.get_current_url()
 
 
-        self.get_screenshot()
+            self.click_radio_button_buy_without_free_trial()
+            self.click_add_to_cart_button()
+            self.assert_word(self.get_added_to_cart_label(), "Added to cart")
+
+
+            self.get_screenshot()
+            Logger.add_end_step(url = self.driver.current_url, method = "buy_book")
+
+
  

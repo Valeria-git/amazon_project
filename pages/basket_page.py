@@ -3,6 +3,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from base.base import Base
 from selenium.common.exceptions import TimeoutException
+from logger import Logger
+import allure
 
 class BasketPage(Base):
 
@@ -64,21 +66,28 @@ class BasketPage(Base):
  
     """Go to checkout in case basket is not empty"""
     def checkout(self):
+        with allure.step("Check out product"):
+            Logger.add_start_step(method = "checkout")
 
-        self.get_current_url()
-        self.click_basket_button()
-        self.assert_url("https://www.amazon.com/gp/cart/view.html?ref_=nav_cart")
-        self.click_proceed_to_check_out_button()
+            self.get_current_url()
+            self.click_basket_button()
+            self.assert_url("https://www.amazon.com/gp/cart/view.html?ref_=nav_cart")
+            self.click_proceed_to_check_out_button()
 
-        self.get_screenshot()
+            self.get_screenshot()
+            Logger.add_end_step(url = self.driver.current_url, method = "checkout")
  
     """Delete product from basket"""
     def delete_product_from_basket(self):
-        self.get_current_url()
-        self.click_basket_button()
-        self.assert_url("https://www.amazon.com/gp/cart/view.html?ref_=nav_cart")
-        if self.is_word_present(self.get_empty_cart_label(), "Your Amazon Cart is empty"):
-            print("Basket empty")
-        else:
-            self.click_delete_from_basket_button()
+        with allure.step("Delete product from basket"):
+            Logger.add_start_step(method = "delete_product_from_basket")
+            self.get_current_url()
+            self.click_basket_button()
+            self.assert_url("https://www.amazon.com/gp/cart/view.html?ref_=nav_cart")
+            if self.is_word_present(self.get_empty_cart_label(), "Your Amazon Cart is empty"):
+                print("Basket empty")
+            else:
+                self.click_delete_from_basket_button()
+            Logger.add_end_step(url = self.driver.current_url, method = "delete_product_from_basket")
+
 

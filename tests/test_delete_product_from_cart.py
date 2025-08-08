@@ -6,10 +6,13 @@ from pages.product_page import ProductPage
 from pages.basket_page import BasketPage
 from pages.payment_page import PaymentPage
 import pytest
+import allure
 
 
 
 
+
+allure.description("Delete product from cart")
 def test_delete_product_from_cart(set_up):
         login = LoginPage(set_up)
         login.authorization()

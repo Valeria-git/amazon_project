@@ -4,6 +4,8 @@ from selenium.webdriver.support.wait import WebDriverWait
 from base.base import Base
 import json
 import os
+from logger import Logger
+import allure
 
 class LoginPage(Base):
 
@@ -22,20 +24,20 @@ class LoginPage(Base):
     #Getters
 
     def get_user_name(self):
-        return WebDriverWait(self.driver, 6).until(EC.visibility_of_element_located((By.XPATH, self.user_name)))
+        return WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located((By.XPATH, self.user_name)))
  
     def get_password(self):
-        return WebDriverWait(self.driver, 6).until(EC.visibility_of_element_located((By.XPATH, self.password)))
+        return WebDriverWait(self.driver, 30).until(EC.visibility_of_element_located((By.XPATH, self.password)))
     
     def get_continue_button(self):
-        return WebDriverWait(self.driver, 6).until(EC.element_to_be_clickable((By.XPATH, self.continue_button)))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.continue_button)))
 
 
     def get_sign_in_button(self):
-        return WebDriverWait(self.driver, 6).until(EC.element_to_be_clickable((By.XPATH, self.sign_in_button)))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.sign_in_button)))
     
     def get_basket_lable(self):
-        return WebDriverWait(self.driver, 6).until(EC.element_to_be_clickable((By.XPATH, self.basket_lable)))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable((By.XPATH, self.basket_lable)))
 
 
     #Actions
@@ -70,18 +72,21 @@ class LoginPage(Base):
  
     """Login"""
     def authorization(self):
+        with allure.step("Authorization"):
+            Logger.add_start_step(method = "authorization")
 
 
-        self.get_current_url()
+            self.get_current_url()
 
-        json_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "utils", "credentials.json")
-        with open(json_path) as f:
-            creds = json.load(f)
+            json_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "utils", "credentials.json")
+            with open(json_path) as f:
+                creds = json.load(f)
 
 
-        self.input_user_name(creds["email"])
-        self.click_continue_button()
-        self.input_password(creds["password"])
-        self.click_sign_in_button()
+            self.input_user_name(creds["email"])
+            self.click_continue_button()
+            self.input_password(creds["password"])
+            self.click_sign_in_button()
+            Logger.add_end_step(url = self.driver.current_url, method = "authorization")
 
  
