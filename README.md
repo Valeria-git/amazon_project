@@ -66,7 +66,7 @@ You must create your own `credentials.json` file with the following structure:
   "email": "your_email@example.com",
   "password": "your_password"
 }
-
+```
 
 ## How run test using allure 
 
